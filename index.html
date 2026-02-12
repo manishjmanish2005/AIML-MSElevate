@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI Forest Fire Risk Prediction System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #eef7ee;
+  margin: 0;
+}
+header {
+  background: #2e7d32;
+  color: white;
+  text-align: center;
+  padding: 15px;
+}
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+}
+input, button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 16px;
+}
+button {
+  background: #388e3c;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+button:hover {
+  background: #2e7d32;
+}
+.card {
+  background: white;
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  display: none;
+}
+.low { color: green; }
+.medium { color: orange; }
+.high { color: red; }
+footer {
+  text-align: center;
+  background: #c8e6c9;
+  padding: 10px;
+  margin-top: 20px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🌲 AI Forest Fire Risk Predictor</h1>
+  <p>Environment Protection System</p>
+</header>
+
+<div class="container">
+  <input type="number" id="temp" placeholder="Temperature (°C)">
+  <input type="number" id="humidity" placeholder="Humidity (%)">
+  <input type="number" id="wind" placeholder="Wind Speed (km/h)">
+
+  <button onclick="predictFire()">Predict Fire Risk</button>
+
+  <div class="card" id="result">
+    <h2>🔥 Fire Risk Analysis</h2>
+    <p><b>Risk Level:</b> <span id="riskLevel"></span></p>
+    <p><b>AI Advice:</b></p>
+    <p id="advice"></p>
+  </div>
+</div>
+
+<footer>
+  <p>AI + Environment Project | Frontend Only</p>
+</footer>
+
+<script>
+function predictFire() {
+  const temp = document.getElementById("temp").value;
+  const humidity = document.getElementById("humidity").value;
+  const wind = document.getElementById("wind").value;
+
+  if (temp === "" || humidity === "" || wind === "") {
+    alert("Please enter all values");
+    return;
+  }
+
+  let risk = "";
+  let advice = "";
+  let className = "";
+
+  if (temp > 40 && humidity < 30 && wind > 25) {
+    risk = "High Risk 🔴";
+    advice = "Extreme fire danger. Avoid forest entry. Emergency response needed.";
+    className = "high";
+  } else if (temp > 30 && humidity < 50 && wind > 15) {
+    risk = "Moderate Risk 🟠";
+    advice = "Fire risk present. Monitor conditions closely.";
+    className = "medium";
+  } else {
+    risk = "Low Risk 🟢";
+    advice = "Fire risk is low. Conditions are safe.";
+    className = "low";
+  }
+
+  document.getElementById("result").style.display = "block";
+  document.getElementById("riskLevel").innerText = risk;
+  document.getElementById("riskLevel").className = className;
+  document.getElementById("advice").innerText = advice;
+}
+</script>
+
+</body>
+</html>
